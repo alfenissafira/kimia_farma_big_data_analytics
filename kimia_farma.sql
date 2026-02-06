@@ -1,4 +1,4 @@
-CREATE TABLE `rakamin-kf-analytics-485414.kimia_farma.sales_data` AS 
+CREATE TABLE `rakamin-kf-analytics-485414.kimia_farma.business_sales_data` AS 
 SELECT
     tfx.transaction_id,
     tfx.date,
@@ -19,7 +19,7 @@ SELECT
         WHEN tfx.price > 300000 AND tfx.price <= 500000 THEN 0.25
         WHEN tfx.price > 500000 THEN 0.30
     END AS persentase_gross_laba,
-    tfx.price AS nett_sales,
+    (tfx.price * (1 - (tfx.discount_percentage / 100)))AS nett_sales,
     tfx.price * (
         CASE
             WHEN tfx.price <= 50000 THEN 0.10
